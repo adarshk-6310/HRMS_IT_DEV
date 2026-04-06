@@ -1,0 +1,55 @@
+﻿@model Models.Employees.Employee
+
+@{
+    Layout = "~/Views/Shared/_LeftLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>@(Model.Id == 0 ? "Add" : "Edit") Employee</h2>
+
+    <form method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label>Name</label>
+                <input asp-for="Name" class="form-control" required />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Email</label>
+                <input asp-for="Email" class="form-control" required />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Mobile</label>
+                <input asp-for="Mobile" class="form-control" required />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Department</label>
+                <input asp-for="Department" class="form-control" required />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Designation</label>
+                <input asp-for="Designation" class="form-control" required />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Date of Birth</label>
+                <input asp-for="DateOfBirth" type="date" class="form-control" required />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Joining Date</label>
+                <input asp-for="JoiningDate" type="date" class="form-control" required />
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="/Employee" class="btn btn-secondary">Back</a>
+    </form>
+</div>

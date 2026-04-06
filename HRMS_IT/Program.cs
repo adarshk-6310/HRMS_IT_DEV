@@ -1,3 +1,5 @@
+using ApiConnect.Services.Employees;
+
 namespace HRMS_IT
 {
     public class Program
@@ -9,6 +11,14 @@ namespace HRMS_IT
             // Add services to the container.
             //builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<DbHelper>();
+            builder.Services.AddHostedService<DbUpdateService>();
+
+            // API URL
+            builder.Services.AddHttpClient<EmployeeService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/"); // your API
+            });
 
             var app = builder.Build();
 
@@ -31,7 +41,7 @@ namespace HRMS_IT
             //app.MapRazorPages().WithStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Employee}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();

@@ -1,4 +1,6 @@
 <Solution>
+  <Project Path="ApiConnect/ApiConnect.csproj" Id="918396d8-dd41-4f22-9496-ef8e3dd9112a" />
   <Project Path="Businesslogiclayer/Businesslogiclayer.csproj" Id="9d7f0e90-a1e6-4437-ba54-912e9d938949" />
+  <Project Path="HRMSModels/Models.csproj" Id="f4a536ae-c818-441b-b061-91b8b0e59176" />
   <Project Path="HRMS_IT/HRMS_IT.csproj" />
 </Solution>

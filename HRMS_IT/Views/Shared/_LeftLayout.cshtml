@@ -1,0 +1,279 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+}
+
+<aside class="left-sidebar" id="leftSidebar">
+    <div class="sidebar-menu">
+        <div class="sidebar-header">
+            <h4><i class="fas fa-bars"></i> Main Navigation</h4>
+        </div>
+        
+        <div class="user-profile-sidebar">
+            <div class="user-avatar-sidebar">
+                <div class="avatar-initials-lg">JD</div>
+            </div>
+            <div class="user-info-sidebar">
+                <h4>John Doe</h4>
+                <p>Administrator</p>
+            </div>
+        </div>
+        
+        <ul class="menu-list">
+            <!-- Dashboard -->
+            <li class="menu-item @(currentController == "Home" && currentAction == "Index" ? "active" : "")">
+                <a href="@Url.Action("Index", "Home")">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                    @if (currentController == "Home" && currentAction == "Index")
+                    {
+                        <span class="menu-active-indicator"></span>
+                    }
+                </a>
+            </li>
+            
+            <!-- Employee Management -->
+            <li class="menu-item has-submenu @(currentController == "Employee" ? "open" : "")">
+                <a href="#" class="submenu-toggle">
+                    <i class="fas fa-users"></i>
+                    <span>Employee Management</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                <ul class="submenu">
+                    <li class="@(currentAction == "Index" && currentController == "Employee" ? "active" : "")">
+                        <a href="@Url.Action("Index", "Employee")">
+                            <i class="fas fa-list"></i> All Employees
+                        </a>
+                    </li>
+                    <li class="@(currentAction == "Create" && currentController == "Employee" ? "active" : "")">
+                        <a href="@Url.Action("Create", "Employee")">
+                            <i class="fas fa-user-plus"></i> Add Employee
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chart-line"></i> Attendance
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-clock"></i> Timesheet
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-file-contract"></i> Contracts
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <!-- Leave Management -->
+            <li class="menu-item has-submenu @(currentController == "Leave" ? "open" : "")">
+                <a href="#" class="submenu-toggle">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Leave Management</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                <ul class="submenu">
+                    <li class="@(currentAction == "Index" && currentController == "Leave" ? "active" : "")">
+                        <a href="@Url.Action("Index", "Leave")">
+                            <i class="fas fa-list"></i> Leave Requests
+                        </a>
+                    </li>
+                    <li class="@(currentAction == "Create" && currentController == "Leave" ? "active" : "")">
+                        <a href="@Url.Action("Create", "Leave")">
+                            <i class="fas fa-plus"></i> Apply Leave
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-check-circle"></i> Approve Leaves
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chart-bar"></i> Leave Balance
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-calendar-week"></i> Holiday Calendar
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <!-- Payroll -->
+            <li class="menu-item has-submenu">
+                <a href="#" class="submenu-toggle">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Payroll</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="#"><i class="fas fa-calculator"></i> Salary Calculator</a></li>
+                    <li><a href="#"><i class="fas fa-file-invoice"></i> Generate Payroll</a></li>
+                    <li><a href="#"><i class="fas fa-history"></i> Payroll History</a></li>
+                    <li><a href="#"><i class="fas fa-download"></i> Reports</a></li>
+                    <li><a href="#"><i class="fas fa-file-pdf"></i> Tax Documents</a></li>
+                </ul>
+            </li>
+            
+            <!-- Recruitment -->
+            <li class="menu-item has-submenu">
+                <a href="#" class="submenu-toggle">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Recruitment</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="#"><i class="fas fa-bullhorn"></i> Job Openings</a></li>
+                    <li><a href="#"><i class="fas fa-file-alt"></i> Applications</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Candidates</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Hiring Pipeline</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Offer Letters</a></li>
+                </ul>
+            </li>
+            
+            <!-- Training -->
+            <li class="menu-item has-submenu">
+                <a href="#" class="submenu-toggle">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Training</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="#"><i class="fas fa-calendar"></i> Training Calendar</a></li>
+                    <li><a href="#"><i class="fas fa-certificate"></i> Certifications</a></li>
+                    <li><a href="#"><i class="fas fa-video"></i> E-Learning</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Progress</a></li>
+                </ul>
+            </li>
+            
+            <!-- Reports -->
+            <li class="menu-item has-submenu">
+                <a href="#" class="submenu-toggle">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Reports</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="#"><i class="fas fa-users"></i> Employee Report</a></li>
+                    <li><a href="#"><i class="fas fa-calendar"></i> Leave Report</a></li>
+                    <li><a href="#"><i class="fas fa-money-bill"></i> Payroll Report</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Analytics Dashboard</a></li>
+                </ul>
+            </li>
+            
+            <!-- Settings -->
+            <li class="menu-item has-submenu">
+                <a href="#" class="submenu-toggle">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                    <i class="fas fa-chevron-right arrow-icon"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="#"><i class="fas fa-building"></i> Company Settings</a></li>
+                    <li><a href="#"><i class="fas fa-user-shield"></i> Roles & Permissions</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Email Templates</a></li>
+                    <li><a href="#"><i class="fas fa-database"></i> System Configuration</a></li>
+                </ul>
+            </li>
+        </ul>
+        
+        <!-- Quick Actions -->
+        <div class="sidebar-footer">
+            <div class="quick-actions">
+                <h5>Quick Actions</h5>
+                <button class="quick-action-btn" onclick="window.location.href='@Url.Action("Create", "Employee")'">
+                    <i class="fas fa-user-plus"></i> Add Employee
+                </button>
+                <button class="quick-action-btn" onclick="window.location.href='@Url.Action("Create", "Leave")'">
+                    <i class="fas fa-calendar-plus"></i> Apply Leave
+                </button>
+                <button class="quick-action-btn">
+                    <i class="fas fa-file-export"></i> Export Report
+                </button>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<style>
+    .user-profile-sidebar {
+        padding: 20px;
+        text-align: center;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 10px;
+    }
+    
+    .avatar-initials-lg {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 24px;
+        color: white;
+        margin: 0 auto 10px;
+    }
+    
+    .user-info-sidebar h4 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+    }
+    
+    .user-info-sidebar p {
+        margin: 0;
+        font-size: 12px;
+        color: #667eea;
+    }
+    
+    .menu-active-indicator {
+        width: 4px;
+        height: 20px;
+        background: white;
+        border-radius: 2px;
+        margin-left: auto;
+    }
+    
+    .sidebar-footer {
+        padding: 20px;
+        border-top: 1px solid #e0e0e0;
+        margin-top: 20px;
+    }
+    
+    .quick-actions h5 {
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #666;
+    }
+    
+    .quick-action-btn {
+        width: 100%;
+        padding: 8px 12px;
+        margin-bottom: 8px;
+        background: #f8f9fa;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+    }
+    
+        .quick-action-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+</style>
