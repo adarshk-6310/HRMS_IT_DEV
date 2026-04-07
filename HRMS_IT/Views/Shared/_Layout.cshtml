@@ -32,10 +32,10 @@
         </nav>
     </header>
 
+    @await Html.PartialAsync("_Sidebar")
 
-
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div class="container-fluid">
+        <main role="main" class="pb-3" style="padding-left:252px;">
             @RenderBody()
         </main>
     </div>

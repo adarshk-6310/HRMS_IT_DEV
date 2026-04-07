@@ -1730,6 +1730,9 @@
 .ps-5 {
   padding-left: 3rem !important;
 }
+.ps-16 {
+    padding-left: 16.75rem !important;
+}
 
 @media (min-width: 576px) {
   .d-sm-inline {

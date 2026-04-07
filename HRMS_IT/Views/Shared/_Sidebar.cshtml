@@ -1,0 +1,37 @@
+﻿<div id="sidebar" class="bg-dark text-white">
+
+    <h5 class="text-center py-3 border-bottom">Menu</h5>
+
+    <a href="/Home/Index" class="menu-link">🏠 Dashboard</a>
+    <a href="/Employee/AddEmployee" class="menu-link">➕ Add Employee</a>
+    <a href="/Employee/ViewEmployee" class="menu-link">📋 View Employee</a>
+    <a href="/Employee/EditEmployee" class="menu-link">✏️ Edit Employee</a>
+
+</div>
+
+<style>
+    #sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        top: 56px;
+        left: 0;
+        background: #343a40;
+        transition: 0.3s;
+        z-index: 1000;
+    }
+
+    .menu-link {
+        display: block;
+        padding: 12px 20px;
+        color: #ddd;
+        text-decoration: none;
+    }
+
+        .menu-link:hover {
+            background: #495057;
+            color: #fff;
+        }
+
+   
+</style>
