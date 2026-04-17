@@ -1,0 +1,44 @@
+﻿@model List<Models.Payroll.SalaryStructure>
+
+<div class="container">
+    <h2>Payroll List</h2>
+
+    <a href="/Payroll/Create" class="btn btn-primary mb-3">Add Payroll</a>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Employee</th>
+                    <th>Basic</th>
+                    <th>HRA</th>
+                    <th>Allow</th>
+                    <th>Deduction</th>
+                    <th>Net Salary</th>
+                    <th>Month</th>
+                    <th>Salary Slip</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td>@p.EmployeeName</td>
+                        <td>@p.BasicSalary</td>
+                        <td>@p.HRA</td>
+                        <td>@p.Allowances</td>
+                        <td>@p.Deductions</td>
+                        <td>@p.NetSalary</td>
+                        <td>@p.SalaryMonth.ToString("yyyy-MM")</td>
+                        <td>
+                            <a href="/Payroll/DownloadSlip/@p.Id" class="btn btn-success btn-sm">
+                                Download PDF
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

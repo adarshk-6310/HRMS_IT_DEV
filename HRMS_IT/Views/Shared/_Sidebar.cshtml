@@ -3,9 +3,91 @@
     <h5 class="text-center py-3 border-bottom">Menu</h5>
 
     <a href="/Home/Index" class="menu-link">🏠 Dashboard</a>
-    <a href="/Employee/AddEmployee" class="menu-link">➕ Add Employee</a>
-    <a href="/Employee/ViewEmployee" class="menu-link">📋 View Employee</a>
+    <ul class="nav-menu">
+        <li class="menu-item">
+            <a href="#" class="menu-link">Employee <span class="arrow">▼</span></a>
+            <ul class="submenu">
+                <li><a href="/Employee/AddEmployee">Add Employee</a></li>
+                <li><a href="/Employee/ViewAll">View All Employees</a></li>
+                <li><a href="/Employee/EditEmployee">Edit Employee</a></li>
+                <li><a href="/Employee/DeleteEmployee">Delete Employee</a></li>
+                <li><a href="/Employee/Search">Search Employee</a></li>
+            </ul>
+        </li>
+    </ul>
+     <ul class="nav-menu">
+        <li class="menu-item">
+            <a href="#" class="menu-link">Attendance & leave management <span class="arrow">▼</span></a>
+            <ul class="submenu">
+                <li><a href="/Employee/AddEmployee">Add Employee</a></li>
+                <li><a href="/Employee/ViewAll">View All Employees</a></li>
+                <li><a href="/Employee/EditEmployee">Edit Employee</a></li>
+                <li><a href="/Employee/DeleteEmployee">Delete Employee</a></li>
+                <li><a href="/Employee/Search">Search Employee</a></li>
+            </ul>
+        </li>
+    </ul>
+     <ul class="nav-menu">
+        <li class="menu-item">
+            <a href="#" class="menu-link">Payroll processing <span class="arrow">▼</span></a>
+            <ul class="submenu">
+                <li><a href="/Employee/AddEmployee">Add Employee</a></li>
+                <li><a href="/Employee/ViewAll">View All Employees</a></li>
+                <li><a href="/Employee/EditEmployee">Edit Employee</a></li>
+                <li><a href="/Employee/DeleteEmployee">Delete Employee</a></li>
+                <li><a href="/Employee/Search">Search Employee</a></li>
+            </ul>
+        </li>
+    </ul>
+     <ul class="nav-menu">
+        <li class="menu-item">
+            <a href="#" class="menu-link">Leave application & tracking <span class="arrow">▼</span></a>
+            <ul class="submenu">
+                <li><a href="/Employee/AddEmployee">Add Employee</a></li>
+                <li><a href="/Employee/ViewAll">View All Employees</a></li>
+                <li><a href="/Employee/EditEmployee">Edit Employee</a></li>
+                <li><a href="/Employee/DeleteEmployee">Delete Employee</a></li>
+                <li><a href="/Employee/Search">Search Employee</a></li>
+            </ul>
+        </li>
+    </ul>
+     <ul class="nav-menu">
+        <li class="menu-item">
+            <a href="#" class="menu-link">Payslip & tax documents  <span class="arrow">▼</span></a>
+            <ul class="submenu">
+                <li><a href="/Employee/AddEmployee">Add Employee</a></li>
+                <li><a href="/Employee/ViewAll">View All Employees</a></li>
+                <li><a href="/Employee/EditEmployee">Edit Employee</a></li>
+                <li><a href="/Employee/DeleteEmployee">Delete Employee</a></li>
+                <li><a href="/Employee/Search">Search Employee</a></li>
+            </ul>
+        </li>
+    </ul>
+    <a href="/Employee/ViewEmployee" class="menu-link">HR helpdesk & requests</a>
     <a href="/Employee/EditEmployee" class="menu-link">✏️ Edit Employee</a>
+
+    @* <ul class="nav-menu">
+        <li class="menu-item">
+            <a href="#" class="menu-link" onclick="toggleSubmenu(event)">
+                Employee <span class="arrow">▼</span>
+            </a>
+            <ul class="submenu">
+                <li><a href="/Employee/AddEmployee">➕ Add Employee</a></li>
+                <li><a href="/Employee/ViewAll">📋 View All</a></li>
+                <li><a href="/Employee/EditEmployee">✏️ Edit Employee</a></li>
+            </ul>
+        </li>
+  
+        <li class="menu-item">
+            <a href="#" class="menu-link" onclick="toggleSubmenu(event)">
+                Department <span class="arrow">▼</span>
+            </a>
+            <ul class="submenu">
+                <li><a href="/Department/Add">Add Department</a></li>
+                <li><a href="/Department/ViewAll">View Departments</a></li>
+            </ul>
+        </li>
+    </ul> *@
 
 </div>
 
@@ -34,4 +116,41 @@
         }
 
    
+
+         .submenu { display: none; }
+    .menu-item.open .submenu { display: block; }
+
 </style>
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+      const menuLinks = document.querySelectorAll('.menu-link');
+  
+      menuLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+      
+          const menuItem = this.closest('.menu-item');
+      
+          // Close other submenus
+          document.querySelectorAll('.menu-item.open').forEach(item => {
+            if (item !== menuItem) {
+              item.classList.remove('open');
+            }
+          });
+      
+          // Toggle current
+          menuItem.classList.toggle('open');
+        });
+      });
+  
+      // Close on outside click
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('.menu-item')) {
+          document.querySelectorAll('.menu-item.open').forEach(item => {
+            item.classList.remove('open');
+          });
+        }
+      });
+    });
+</script>

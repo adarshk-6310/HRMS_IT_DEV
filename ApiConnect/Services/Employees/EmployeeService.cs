@@ -15,7 +15,9 @@ namespace ApiConnect.Services.Employees
         {
             //return await _http.GetFromJsonAsync<List<Employee>>("api/employee");
 
-            return new List<Employee>() { new Employee
+            return new List<Employee>()
+            {
+                new Employee
             {
                 Name = "a",
                 Email = "a@gmail.com",

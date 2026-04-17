@@ -1,4 +1,5 @@
 using ApiConnect.Services.Employees;
+using ApiConnect.Services.Payroll;
 
 namespace HRMS_IT
 {
@@ -16,6 +17,11 @@ namespace HRMS_IT
 
             // API URL
             builder.Services.AddHttpClient<EmployeeService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/"); // your API
+            });
+            // API URL
+            builder.Services.AddHttpClient<PayrollService>(client =>
             {
                 client.BaseAddress = new Uri("https://localhost:5001/"); // your API
             });
@@ -41,7 +47,7 @@ namespace HRMS_IT
             //app.MapRazorPages().WithStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Employee}/{action=Index}/{id?}")
+                pattern: "{controller=Payroll}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
