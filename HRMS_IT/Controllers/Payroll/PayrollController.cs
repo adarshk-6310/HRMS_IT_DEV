@@ -2,6 +2,7 @@
 using ApiConnect.Services.Payroll;
 using Microsoft.AspNetCore.Mvc;
 using Models.Payroll;
+using Rotativa.AspNetCore;
 
 namespace HRMS_IT.Controllers.Payroll
 {
@@ -42,15 +43,15 @@ namespace HRMS_IT.Controllers.Payroll
             return RedirectToAction("Index");
         }
 
-        //public async Task<IActionResult> DownloadSlip(int id)
-        //{
-        //    var data = await _service.GetById(id);
+        public async Task<IActionResult> DownloadSlip(int id)
+        {
+            var data = await _service.GetById(id);
 
-        //    //return new ViewAsPdf("SalarySlip", data)
-        //    //{
-        //    //    FileName = "SalarySlip.pdf"
-        //    //};
-        //}
+            return new ViewAsPdf("SalarySlip", data, null, true)
+            {
+                FileName = "SalarySlip.pdf"
+            };
+        }
 
 
     }

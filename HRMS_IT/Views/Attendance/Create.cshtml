@@ -1,0 +1,46 @@
+﻿@model Models.Attendance.Attendances
+
+<div class="container">
+    <h2>Mark Attendance</h2>
+
+    <form method="post">
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label>Employee</label>
+                <select asp-for="EmployeeId" class="form-control">
+                    <option value="">-- Select Employee --</option>
+                    @foreach (var emp in ViewBag.Employees)
+                    {
+                        <option value="@emp.Id">@emp.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Date</label>
+                <input asp-for="Date" type="date" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Status</label>
+                <select asp-for="Status" class="form-control">
+                    <option>Present</option>
+                    <option>Absent</option>
+                    <option>Leave</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Remarks</label>
+                <input asp-for="Remarks" class="form-control" />
+            </div>
+
+        </div>
+
+        <button class="btn btn-success">Save</button>
+        <a href="/Attendance" class="btn btn-secondary">Back</a>
+
+    </form>
+</div>

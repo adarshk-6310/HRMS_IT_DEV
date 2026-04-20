@@ -1,0 +1,38 @@
+﻿@model List<Models.Attendance.Attendances>
+
+<div class="container">
+    <h2>Attendance List</h2>
+
+    <a href="/Attendance/Create" class="btn btn-primary mb-3">
+        Mark Attendance
+    </a>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Employee</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var a in Model)
+                {
+                    <tr>
+                        <td>@a.EmployeeName</td>
+                        <td>@a.Date.ToShortDateString()</td>
+                        <td>
+                            <span class="badge bg-@(a.Status == "Present" ? "success" : a.Status == "Absent" ? "danger" : "warning")">
+                                @a.Status
+                            </span>
+                        </td>
+                        <td>@a.Remarks</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

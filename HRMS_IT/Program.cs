@@ -1,5 +1,7 @@
+using ApiConnect.Services.Attendance;
 using ApiConnect.Services.Employees;
 using ApiConnect.Services.Payroll;
+using Rotativa.AspNetCore;
 
 namespace HRMS_IT
 {
@@ -25,8 +27,16 @@ namespace HRMS_IT
             {
                 client.BaseAddress = new Uri("https://localhost:5001/"); // your API
             });
+            builder.Services.AddHttpClient<AttendanceService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:5001/");// your API
+            });
 
             var app = builder.Build();
+
+
+            // for download Pdf
+            RotativaConfiguration.Setup(app.Environment.WebRootPath, "Rotativa");
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -36,6 +46,12 @@ namespace HRMS_IT
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
+            //for static file
+            app.UseStaticFiles();
+            app.UseRouting();
+
 
             app.UseHttpsRedirection();
 
@@ -47,7 +63,7 @@ namespace HRMS_IT
             //app.MapRazorPages().WithStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Payroll}/{action=Index}/{id?}")
+                pattern: "{controller=Attendance}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
