@@ -1,10 +1,17 @@
-﻿@model HRMS_IT.Models.LoginViewModel
+﻿@model Models.Login.LoginViewModel
 @{
     ViewData["Title"] = "Login";
 }
 @{
-    Layout = "~/Views/Shared/_LeftLayout.cshtml";
+    Layout = null;
 }
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/HRMS_IT.styles.css" asp-append-version="true" />
+
+@*  @{
+    Layout = "~/Views/Shared/_LeftLayout.cshtml";
+} *@
 
 <div class="container">
     <div class="row justify-content-center">
@@ -16,8 +23,9 @@
 
                 <div class="card-body p-4">
 
-                    <form asp-action="Login" asp-controller="HomeController" method="post" class="needs-validation" novalidate>
+                    <form asp-action="Login" asp-controller="Home" method="post" class="needs-validation" novalidate>
                         <input type="hidden" asp-for="ReturnUrl"/>
+                         @* @Html.AntiForgeryToken() *@ 
                         <div class="mb-3">
                             <label asp-for="UserNameOrEmail" class="form-label"></label>
                             <input asp-for="UserNameOrEmail" class="form-control" placeholder="Username or email address" autofocus />
@@ -57,7 +65,9 @@
     </div>
 </div>
 
-@section Scripts {
+@* @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-}
+} *@
 
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>

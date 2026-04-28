@@ -11,25 +11,58 @@ namespace HRMS_IT
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //
+            //REQUIRED FOR SESSION
+            builder.Services.AddDistributedMemoryCache();
+            builder.Services.AddSession();
+
+
             // Add services to the container.
             //builder.Services.AddRazorPages();
+            builder.Services.AddHttpContextAccessor();
             builder.Services.AddControllersWithViews();
             builder.Services.AddSingleton<DbHelper>();
             builder.Services.AddHostedService<DbUpdateService>();
 
+            // add cookies data
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                //options.Cookie.HttpOnly = true;
+                //options.ExpireTimeSpan = TimeSpan.FromDays(7);
+                options.LoginPath = "/Home/Login";
+                options.LogoutPath = "/Home/Logout";
+                //options.AccessDeniedPath = "/Home/AccessDenied";
+                //options.SlidingExpiration = true;
+                //options.ReturnUrlParameter = "returnUrl";
+            });
+
+
+            //logIn
+            builder.Services.AddHttpClient<ApiConnect.Services.Auth.AuthService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44367/"); // your API URL
+            });
+
             // API URL
             builder.Services.AddHttpClient<EmployeeService>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:5001/"); // your API
+                client.BaseAddress = new Uri("https://localhost:44367/"); // your API
+            });
+
+
+            // API URL
+            builder.Services.AddHttpClient<EmployeeService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:44367/"); // your API
             });
             // API URL
             builder.Services.AddHttpClient<PayrollService>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:5001/"); // your API
+                client.BaseAddress = new Uri("https://localhost:44367/"); // your API
             });
             builder.Services.AddHttpClient<AttendanceService>(client =>
             {
-                client.BaseAddress = new Uri("https://localhost:5001/");// your API
+                client.BaseAddress = new Uri("https://localhost:44367/");// your API
             });
 
             var app = builder.Build();
@@ -51,7 +84,7 @@ namespace HRMS_IT
             //for static file
             app.UseStaticFiles();
             app.UseRouting();
-
+            app.UseSession();
 
             app.UseHttpsRedirection();
 
@@ -63,7 +96,7 @@ namespace HRMS_IT
             //app.MapRazorPages().WithStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Attendance}/{action=Index}/{id?}")
+                pattern: "{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
